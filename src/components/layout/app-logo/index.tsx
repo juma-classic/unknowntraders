@@ -8,7 +8,7 @@ export const AppLogo = () => {
     if (!isDesktop) return null;
     return (
         <a
-            href='https://www.unknowntraders.site/'
+            href='https://unknowntraders.vercel.app/'
             target='_blank'
             rel='noopener noreferrer'
             className='app-header__logo unknowntraders-logo'
