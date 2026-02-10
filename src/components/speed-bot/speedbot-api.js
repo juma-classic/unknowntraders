@@ -10,7 +10,7 @@
 
     // Get API configuration from environment or use default
     const getApiConfig = () => {
-        const appId = window.DERIV_APP_ID || '120557';
+        const appId = window.DERIV_APP_ID || '126101';
         return `wss://ws.derivws.com/websockets/v3?app_id=${appId}`;
     };
 

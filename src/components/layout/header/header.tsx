@@ -119,7 +119,7 @@ const AppHeader = observer(() => {
                         tertiary
                         onClick={() => {
                             window.location.replace(
-                                'https://oauth.deriv.com/oauth2/authorize?app_id=120557&l=EN&brand=unknowntraders'
+                                'https://oauth.deriv.com/oauth2/authorize?app_id=126101&l=EN&brand=unknowntraders'
                             );
                         }}
                     >
