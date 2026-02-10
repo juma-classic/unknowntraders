@@ -73,8 +73,8 @@ function AppWrapper() {
                         console.warn('⚠️ API initialization failed, will retry on demand:', error);
                     });
 
-                // Minimal delay for smooth UX
-                await new Promise(resolve => setTimeout(resolve, 300));
+                // Extended delay to allow Konami code input
+                await new Promise(resolve => setTimeout(resolve, 2000));
                 setIsLoading(false);
 
                 // Load non-critical scripts after app is ready
@@ -89,7 +89,7 @@ function AppWrapper() {
     }, []);
 
     if (isLoading) {
-        return <UnknownTradersLoader onLoadComplete={() => setIsLoading(false)} duration={3000} />;
+        return <UnknownTradersLoader onLoadComplete={() => setIsLoading(false)} duration={5000} />;
     }
 
     return <AuthWrapper />;
