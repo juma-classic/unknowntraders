@@ -1,5 +1,5 @@
 import React from 'react';
-import { UnknownTradersLoader }@/components/loader/UnknownTradersLoadernTradersLoader';
+import { UnknownTradersLoader } from '@/components/loader/UnknownTradersLoader';
 import { generateDerivApiInstance } from '@/external/bot-skeleton/services/api/appId';
 import { URLUtils } from '@deriv-com/utils';
 import App from './App';
