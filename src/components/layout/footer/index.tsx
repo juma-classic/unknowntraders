@@ -1,4 +1,3 @@
-import React from 'react';
 import useRemoteConfig from '@/hooks/growthbook/useRemoteConfig';
 import useModalManager from '@/hooks/useModalManager';
 import { getActiveTabUrl } from '@/utils/getActiveTabUrl';
@@ -22,35 +21,11 @@ import './footer.scss';
 const Footer = () => {
     const { currentLang = 'EN', localize, switchLanguage } = useTranslations();
     const { hideModal, isModalOpenFor, showModal } = useModalManager();
-    const [tapCount, setTapCount] = React.useState(0);
-    const tapTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
     const openLanguageSettingModal = () => showModal('DesktopLanguagesModal');
 
     const { data } = useRemoteConfig(true);
     const { cs_chat_whatsapp } = data;
-
-    const handleSecretTap = () => {
-        setTapCount(prev => prev + 1);
-
-        if (tapTimeoutRef.current) {
-            clearTimeout(tapTimeoutRef.current);
-        }
-
-        tapTimeoutRef.current = setTimeout(() => {
-            if (tapCount + 1 === 7) {
-                // Toggle fake real mode on 7 taps
-                const currentMode = localStorage.getItem('demo_icon_us_flag');
-                if (currentMode) {
-                    localStorage.removeItem('demo_icon_us_flag');
-                } else {
-                    localStorage.setItem('demo_icon_us_flag', 'true');
-                }
-                window.location.reload();
-            }
-            setTapCount(0);
-        }, 800);
-    };
 
     return (
         <footer className='app-footer'>
@@ -66,7 +41,7 @@ const Footer = () => {
             {cs_chat_whatsapp && <WhatsApp />}
             <div className='app-footer__vertical-line' />
             <ServerTime />
-            <div className='app-footer__vertical-line' onClick={handleSecretTap} style={{ cursor: 'default' }} />
+            <div className='app-footer__vertical-line' />
             <NetworkStatus />
             <Endpoint />
 
