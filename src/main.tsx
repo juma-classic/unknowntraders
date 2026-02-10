@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { AuthWrapper } from './app/AuthWrapper';
-import { UnknownTradersLoader }./components/loader/UnknownTradersLoadernTradersLoader';
+import { UnknownTradersLoader } from './components/loader/UnknownTradersLoader';
 import { derivAPIInitializer } from './services/deriv-api-initializer.service';
 import { chunkErrorHandler } from './utils/chunk-error-handler';
 import { networkTimeoutHandler } from './utils/network-timeout-handler';
