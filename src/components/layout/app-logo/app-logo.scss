@@ -1,0 +1,32 @@
+.app-header {
+    &__logo {
+        padding-inline-start: 1.2rem;
+        padding-inline-end: 2rem;
+        border-inline-end: 1px solid var(--general-section-1);
+        height: 32px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+
+        &.pipnova-logo {
+            .pipnova-text {
+                font-size: 1.625rem; // Increased by 30% from 1.25rem
+                font-weight: 900;
+                letter-spacing: 0.5px;
+                background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-transform: uppercase;
+                transition: all 0.3s ease;
+                text-shadow: 0 2px 4px rgba(251, 191, 36, 0.2);
+
+                &:hover {
+                    background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+}
