@@ -68,7 +68,7 @@ const SpeedBotPage = lazy(() => import('../pages/speed-bot-page').then(m => ({ d
 // xDTrader Page
 const XDTraderPage = lazy(() => import('../pages/xdtrader-page').then(m => ({ default: m.default })));
 
-// Nova Analysis Page
+// D Analysis Page
 const NovaAnalysisPage = lazy(() => import('../pages/nova-analysis-page').then(m => ({ default: m.default })));
 
 const { TRANSLATIONS_CDN_URL, R2_PROJECT_NAME, CROWDIN_BRANCH_NAME } = process.env;
@@ -129,7 +129,7 @@ const router = createBrowserRouter(
             {/* xDTrader Page */}
             <Route path='xdtrader' element={<XDTraderPage />} />
 
-            {/* Nova Analysis Page */}
+            {/* D Analysis Page */}
             <Route path='nova-analysis' element={<NovaAnalysisPage />} />
 
             {/* Phase 1 Demo Routes */}
