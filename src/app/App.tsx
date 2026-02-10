@@ -82,7 +82,7 @@ const router = createBrowserRouter(
             path='/'
             element={
                 <Suspense
-                    fallback={<ChunkLoader message={localize('Welcome to PIPNOVA connecting to the server...')} />}
+                    fallback={<ChunkLoader message={localize('Welcome to UNKNOWN TRADERS connecting to the server...')} />}
                 >
                     <TranslationProvider defaultLang='EN' i18nInstance={i18nInstance}>
                         <StoreProvider>

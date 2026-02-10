@@ -1,5 +1,5 @@
 /**
- * Centralized API Configuration for PIPNOVA
+ * Centralized API Configuration for UNKNOWN TRADERS
  *
  * This file manages all Deriv API credentials and endpoints.
  * Update these values with your own app_id from https://api.deriv.com/app-registration

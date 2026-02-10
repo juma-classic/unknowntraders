@@ -28,7 +28,7 @@ class DerivAPIInitializer {
         appId: 120557,
         endpoint: 'wss://ws.derivws.com/websockets/v3',
         language: 'en',
-        brand: 'pipnova',
+        brand: 'unknowntraders',
     };
 
     public static getInstance(): DerivAPIInitializer {

@@ -8,12 +8,12 @@ export const AppLogo = () => {
     if (!isDesktop) return null;
     return (
         <a
-            href='https://www.pipnova.site/'
+            href='https://www.unknowntraders.site/'
             target='_blank'
             rel='noopener noreferrer'
-            className='app-header__logo pipnova-logo'
+            className='app-header__logo unknowntraders-logo'
         >
-            <span className='pipnova-text'>PIPNOVA</span>
+            <span className='unknowntraders-text'>UNKNOWN TRADERS</span>
         </a>
     );
 };

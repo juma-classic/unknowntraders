@@ -3154,9 +3154,8 @@ const AppWrapper = observer(() => {
                                     }}
                                 >
                                     <a
-                                        href='https://www.youtube.com/@bonniemurigi'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
+                                        href='#'
+                                        onClick={(e) => e.preventDefault()}
                                         style={{
                                             width: '40px',
                                             height: '40px',
@@ -3169,6 +3168,7 @@ const AppWrapper = observer(() => {
                                             fontSize: '20px',
                                             textDecoration: 'none',
                                             transition: 'transform 0.2s ease',
+                                            cursor: 'default',
                                         }}
                                         onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.1)')}
                                         onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
@@ -3176,9 +3176,8 @@ const AppWrapper = observer(() => {
                                         ▶
                                     </a>
                                     <a
-                                        href='https://www.instagram.com/bonnie_binary?igsh=cHAwNGJiNXoxNGo='
-                                        target='_blank'
-                                        rel='noopener noreferrer'
+                                        href='#'
+                                        onClick={(e) => e.preventDefault()}
                                         style={{
                                             width: '40px',
                                             height: '40px',
@@ -3192,6 +3191,7 @@ const AppWrapper = observer(() => {
                                             fontSize: '20px',
                                             textDecoration: 'none',
                                             transition: 'transform 0.2s ease',
+                                            cursor: 'default',
                                         }}
                                         onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.1)')}
                                         onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
@@ -3199,9 +3199,8 @@ const AppWrapper = observer(() => {
                                         📷
                                     </a>
                                     <a
-                                        href='https://wa.me/254799094649'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
+                                        href='#'
+                                        onClick={(e) => e.preventDefault()}
                                         style={{
                                             width: '40px',
                                             height: '40px',
@@ -3214,6 +3213,7 @@ const AppWrapper = observer(() => {
                                             fontSize: '20px',
                                             textDecoration: 'none',
                                             transition: 'transform 0.2s ease',
+                                            cursor: 'default',
                                         }}
                                         onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.1)')}
                                         onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
@@ -3221,9 +3221,8 @@ const AppWrapper = observer(() => {
                                         💬
                                     </a>
                                     <a
-                                        href='https://tiktok.com/@bonniemurigi'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
+                                        href='#'
+                                        onClick={(e) => e.preventDefault()}
                                         style={{
                                             width: '40px',
                                             height: '40px',
@@ -3236,6 +3235,7 @@ const AppWrapper = observer(() => {
                                             fontSize: '20px',
                                             textDecoration: 'none',
                                             transition: 'transform 0.2s ease',
+                                            cursor: 'default',
                                         }}
                                         onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.1)')}
                                         onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
@@ -3243,9 +3243,8 @@ const AppWrapper = observer(() => {
                                         🎵
                                     </a>
                                     <a
-                                        href='https://t.me/Binovate'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
+                                        href='#'
+                                        onClick={(e) => e.preventDefault()}
                                         style={{
                                             width: '40px',
                                             height: '40px',
@@ -3258,6 +3257,7 @@ const AppWrapper = observer(() => {
                                             fontSize: '20px',
                                             textDecoration: 'none',
                                             transition: 'transform 0.2s ease',
+                                            cursor: 'default',
                                         }}
                                         onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.1)')}
                                         onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}

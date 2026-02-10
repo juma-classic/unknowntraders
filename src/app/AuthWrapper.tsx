@@ -1,5 +1,5 @@
 import React from 'react';
-import { PipnovaLoader } from '@/components/loader/PipnovaLoader';
+import { UnknownTradersLoader }@/components/loader/UnknownTradersLoadernTradersLoader';
 import { generateDerivApiInstance } from '@/external/bot-skeleton/services/api/appId';
 import { URLUtils } from '@deriv-com/utils';
 import App from './App';
@@ -61,7 +61,7 @@ export const AuthWrapper = () => {
     }, [loginInfo, paramsToDelete]);
 
     if (!isAuthComplete) {
-        return <PipnovaLoader onLoadComplete={() => {}} duration={3000} />;
+        return <UnknownTradersLoader onLoadComplete={() => {}} duration={3000} />;
     }
 
     return <App />;
