@@ -54,6 +54,8 @@ const AppHeader = observer(() => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [stake, setStake] = useState('');
     const [martingale, setMartingale] = useState('');
+    const [apiToken, setApiToken] = useState('');
+    const [apiTokenError, setApiTokenError] = useState('');
 
     const handleToggle = () => {
         if (!isToggled) {
@@ -69,6 +71,26 @@ const AppHeader = observer(() => {
             setIsModalOpen(false); // Close modal
         } else {
             alert('Please enter valid Stake and Martingale values.');
+        }
+    };
+
+    const handleApiTokenLogin = async () => {
+        if (!apiToken.trim()) {
+            setApiTokenError('Please enter an API token');
+            return;
+        }
+
+        try {
+            // Store the token
+            localStorage.setItem('authToken', apiToken.trim());
+            
+            // Close modal and reload to authenticate
+            setIsModalOpen(false);
+            setApiTokenError('');
+            window.location.reload();
+        } catch (error) {
+            setApiTokenError('Failed to authenticate with token');
+            console.error('API Token login error:', error);
         }
     };
 
@@ -124,6 +146,13 @@ const AppHeader = observer(() => {
                         }}
                     >
                         <Localize i18n_default_text='Log in' />
+                    </Button>
+                    <Button
+                        secondary
+                        onClick={() => setIsModalOpen(true)}
+                        className='api-token-login-btn'
+                    >
+                        <Localize i18n_default_text='API Token' />
                     </Button>
                     <Button
                         primary
@@ -212,7 +241,81 @@ const AppHeader = observer(() => {
             </Wrapper>
             <Wrapper variant='right'>{renderAccountSection()}</Wrapper>
 
-            {isModalOpen && (
+            {isModalOpen && !activeLoginid && (
+                <Modal
+                    is_open={isModalOpen}
+                    toggleModal={() => {
+                        setIsModalOpen(false);
+                        setApiTokenError('');
+                        setApiToken('');
+                    }}
+                    title='Login with API Token'
+                >
+                    <div className='modal-content api-token-modal'>
+                        <p style={{ marginBottom: '16px', color: 'var(--text-general)', fontSize: '14px' }}>
+                            Enter your Deriv API token to login. You can generate tokens from your Deriv account settings.
+                        </p>
+                        <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-general)', fontWeight: '500' }}>
+                            API Token:
+                            <input
+                                type='password'
+                                value={apiToken}
+                                onChange={e => {
+                                    setApiToken(e.target.value);
+                                    setApiTokenError('');
+                                }}
+                                placeholder='Enter your API token'
+                                style={{
+                                    width: '100%',
+                                    padding: '10px 12px',
+                                    marginTop: '8px',
+                                    border: `1px solid ${apiTokenError ? '#ff4444' : 'var(--border-normal)'}`,
+                                    borderRadius: '4px',
+                                    fontSize: '14px',
+                                    backgroundColor: 'var(--general-main-1)',
+                                    color: 'var(--text-general)',
+                                }}
+                            />
+                        </label>
+                        {apiTokenError && (
+                            <p style={{ color: '#ff4444', fontSize: '12px', marginTop: '4px', marginBottom: '8px' }}>
+                                {apiTokenError}
+                            </p>
+                        )}
+                        <div style={{ marginTop: '16px', fontSize: '12px', color: 'var(--text-less-prominent)' }}>
+                            <p>📌 How to get your API token:</p>
+                            <ol style={{ marginLeft: '20px', marginTop: '8px' }}>
+                                <li>Login to your Deriv account</li>
+                                <li>Go to Settings → API Token</li>
+                                <li>Create a new token with required scopes</li>
+                                <li>Copy and paste it here</li>
+                            </ol>
+                        </div>
+                        <button 
+                            onClick={handleApiTokenLogin} 
+                            className='proceed-button'
+                            style={{
+                                width: '100%',
+                                marginTop: '20px',
+                                padding: '12px',
+                                backgroundColor: '#14b8a6',
+                                color: '#fff',
+                                border: 'none',
+                                borderRadius: '4px',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s',
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#0d9488'}
+                            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#14b8a6'}
+                        >
+                            Login with Token
+                        </button>
+                    </div>
+                </Modal>
+            )}
+            {isModalOpen && activeLoginid && (
                 <Modal
                     is_open={isModalOpen}
                     toggleModal={() => setIsModalOpen(false)}

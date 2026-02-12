@@ -525,6 +525,17 @@
     }
 }
 
+/* API Token Login Button */
+.api-token-login-btn {
+    margin: 0 8px !important;
+    white-space: nowrap;
+    
+    @media (max-width: 768px) {
+        font-size: 12px !important;
+        padding: 8px 12px !important;
+    }
+}
+
 .social-icon-btn {
     width: 40px;
     height: 40px;
