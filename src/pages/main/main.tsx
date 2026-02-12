@@ -862,6 +862,12 @@ const AppWrapper = observer(() => {
     useEffect(() => {
         const fetchBots = async () => {
             const botFiles = [
+                // New Bots - 2024
+                'ALEXSPEEDBOT_ EXPRO2 (2).xml',
+                'Even and odd flipper📊📈.xml',
+                'Unkownmentor over destroyer💲.xml',
+                'Atomated under 😎.xml',
+
                 // Core Trading Bots
                 'PATEL (with Entry).xml',
                 'Game Changer AI (1).xml',
