@@ -518,6 +518,11 @@
     display: flex;
     gap: 0.5rem;
     margin-left: 0.8rem;
+
+    /* Hide on mobile */
+    @media (max-width: 768px) {
+        display: none;
+    }
 }
 
 .social-icon-btn {
