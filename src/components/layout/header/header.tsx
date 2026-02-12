@@ -112,26 +112,23 @@ const AppHeader = observer(() => {
                         </Tooltip>
                     )}
                     <AccountSwitcher activeAccount={activeAccount} />
-                    {isDesktop &&
-                        (has_wallet ? (
-                            <Button
-                                className='manage-funds-button'
-                                has_effect
-                                text={localize('Manage funds')}
-                                onClick={() => window.location.assign(standalone_routes.wallets_transfer)}
-                                primary
-                            />
-                        ) : (
-                            <Button
-                                primary
-                                onClick={() => {
-                                    window.location.assign(standalone_routes.cashier_deposit);
-                                }}
-                                className='deposit-button'
-                            >
-                                {localize('Deposit')}
-                            </Button>
-                        ))}
+                    {isDesktop && (
+                        <Button
+                            secondary
+                            onClick={() => {
+                                // Clear authentication data
+                                localStorage.removeItem('authToken');
+                                localStorage.removeItem('active_loginid');
+                                localStorage.removeItem('accountsList');
+                                localStorage.removeItem('clientAccounts');
+                                // Reload to logout
+                                window.location.reload();
+                            }}
+                            className='logout-button'
+                        >
+                            {localize('Logout')}
+                        </Button>
+                    )}
                 </>
             );
         } else {
