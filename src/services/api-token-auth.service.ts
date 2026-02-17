@@ -91,12 +91,13 @@ class APITokenAuthService {
 
             const authData = response.authorize;
 
-            // Build accounts structure
+            // Build accounts structure compatible with existing code
             const clientAccounts: ClientAccounts = {};
             const accountsList: Record<string, string> = {};
 
             authData.account_list?.forEach(account => {
-                accountsList[account.loginid] = account.loginid;
+                // Store token as value for compatibility with V2GetActiveClientId
+                accountsList[account.loginid] = token.trim();
                 clientAccounts[account.loginid] = {
                     loginid: account.loginid,
                     token: token.trim(),
