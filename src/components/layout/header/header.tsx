@@ -8,6 +8,7 @@ import Modal from '@/components/shared_ui/modal'; // Import the modal component
 import useActiveAccount from '@/hooks/api/account/useActiveAccount';
 import { useApiBase } from '@/hooks/useApiBase';
 import { useStore } from '@/hooks/useStore';
+import { apiTokenAuthService } from '@/services/api-token-auth.service';
 import { StandaloneCircleUserRegularIcon } from '@deriv/quill-icons/Standalone';
 import { Localize, useTranslations } from '@deriv-com/translations';
 import { Header, useDevice, Wrapper } from '@deriv-com/ui';
@@ -80,16 +81,32 @@ const AppHeader = observer(() => {
             return;
         }
 
+        // Validate token format
+        if (!apiTokenAuthService.validateTokenFormat(apiToken.trim())) {
+            setApiTokenError('Invalid token format');
+            return;
+        }
+
         try {
-            // Store the token
-            localStorage.setItem('authToken', apiToken.trim());
+            setApiTokenError('Authenticating...');
             
-            // Close modal and reload to authenticate
+            // Authenticate using the service
+            const result = await apiTokenAuthService.authenticateWithToken(apiToken.trim());
+            
+            if (!result.success) {
+                setApiTokenError(result.error || 'Authentication failed');
+                return;
+            }
+            
+            // Success - close modal and reload
             setIsModalOpen(false);
             setApiTokenError('');
+            setApiToken('');
+            
+            // Reload to initialize with new auth data
             window.location.reload();
-        } catch (error) {
-            setApiTokenError('Failed to authenticate with token');
+        } catch (error: any) {
+            setApiTokenError(error?.message || 'Failed to authenticate with token');
             console.error('API Token login error:', error);
         }
     };
@@ -116,11 +133,8 @@ const AppHeader = observer(() => {
                         <Button
                             secondary
                             onClick={() => {
-                                // Clear authentication data
-                                localStorage.removeItem('authToken');
-                                localStorage.removeItem('active_loginid');
-                                localStorage.removeItem('accountsList');
-                                localStorage.removeItem('clientAccounts');
+                                // Use the auth service to logout
+                                apiTokenAuthService.logout();
                                 // Reload to logout
                                 window.location.reload();
                             }}
@@ -261,53 +275,82 @@ const AppHeader = observer(() => {
                                     setApiToken(e.target.value);
                                     setApiTokenError('');
                                 }}
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        handleApiTokenLogin();
+                                    }
+                                }}
                                 placeholder='Enter your API token'
                                 style={{
                                     width: '100%',
                                     padding: '10px 12px',
                                     marginTop: '8px',
-                                    border: `1px solid ${apiTokenError ? '#ff4444' : 'var(--border-normal)'}`,
+                                    border: `1px solid ${apiTokenError && apiTokenError !== 'Authenticating...' ? '#ff4444' : 'var(--border-normal)'}`,
                                     borderRadius: '4px',
                                     fontSize: '14px',
                                     backgroundColor: 'var(--general-main-1)',
                                     color: 'var(--text-general)',
                                 }}
+                                disabled={apiTokenError === 'Authenticating...'}
                             />
                         </label>
                         {apiTokenError && (
-                            <p style={{ color: '#ff4444', fontSize: '12px', marginTop: '4px', marginBottom: '8px' }}>
+                            <p style={{ 
+                                color: apiTokenError === 'Authenticating...' ? '#14b8a6' : '#ff4444', 
+                                fontSize: '12px', 
+                                marginTop: '4px', 
+                                marginBottom: '8px' 
+                            }}>
                                 {apiTokenError}
                             </p>
                         )}
                         <div style={{ marginTop: '16px', fontSize: '12px', color: 'var(--text-less-prominent)' }}>
                             <p>📌 How to get your API token:</p>
-                            <ol style={{ marginLeft: '20px', marginTop: '8px' }}>
-                                <li>Login to your Deriv account</li>
-                                <li>Go to Settings → API Token</li>
-                                <li>Create a new token with required scopes</li>
-                                <li>Copy and paste it here</li>
+                            <ol style={{ marginLeft: '20px', marginTop: '8px', lineHeight: '1.6' }}>
+                                <li>
+                                    <a 
+                                        href='https://app.deriv.com/account/api-token' 
+                                        target='_blank' 
+                                        rel='noopener noreferrer'
+                                        style={{ color: '#14b8a6', textDecoration: 'underline' }}
+                                    >
+                                        Go to Deriv API Token page
+                                    </a>
+                                </li>
+                                <li>Create a new token with required scopes (Read, Trade, Payments, Admin)</li>
+                                <li>Copy the generated token</li>
+                                <li>Paste it in the field above</li>
                             </ol>
                         </div>
                         <button 
                             onClick={handleApiTokenLogin} 
                             className='proceed-button'
+                            disabled={apiTokenError === 'Authenticating...'}
                             style={{
                                 width: '100%',
                                 marginTop: '20px',
                                 padding: '12px',
-                                backgroundColor: '#14b8a6',
+                                backgroundColor: apiTokenError === 'Authenticating...' ? '#999' : '#14b8a6',
                                 color: '#fff',
                                 border: 'none',
                                 borderRadius: '4px',
                                 fontSize: '14px',
                                 fontWeight: '600',
-                                cursor: 'pointer',
+                                cursor: apiTokenError === 'Authenticating...' ? 'not-allowed' : 'pointer',
                                 transition: 'all 0.2s',
                             }}
-                            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#0d9488'}
-                            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#14b8a6'}
+                            onMouseEnter={e => {
+                                if (apiTokenError !== 'Authenticating...') {
+                                    e.currentTarget.style.backgroundColor = '#0d9488';
+                                }
+                            }}
+                            onMouseLeave={e => {
+                                if (apiTokenError !== 'Authenticating...') {
+                                    e.currentTarget.style.backgroundColor = '#14b8a6';
+                                }
+                            }}
                         >
-                            Login with Token
+                            {apiTokenError === 'Authenticating...' ? 'Authenticating...' : 'Login with Token'}
                         </button>
                     </div>
                 </Modal>
